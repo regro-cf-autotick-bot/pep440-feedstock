@@ -1,4 +1,4 @@
-{% set version = "0.1.1" %}
+{% set version = "0.1.2" %}
 
 package:
   name: pep440
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/pep440/pep440-{{ version }}.tar.gz
-  sha256: 13d17898769abd028af0f62745c9ce75f5bb9977012a7d5d4c89c29272de34ee
+  sha256: 58b37246cc2b13fee1ca2a3c092cb3704d21ecf621a5bdbb168e44e697f6d04d
 
 build:
   noarch: python
@@ -15,7 +15,7 @@ build:
 
 requirements:
   host:
-    - flit-core >=2,<4
+    - flit-core >=3.2,<4
     - pip
     - python >=3.7
   run:
@@ -28,11 +28,13 @@ test:
     - pep440
   commands:
     - pip check
-    - pytest tests --cov=pep440 --cov-branch --cov-report=term-missing:skip-covered --no-cov-on-fail --cov-fail-under=45
+    - pep440 --help
+    - pytest tests --cov=pep440 --cov-branch --cov-report=term-missing:skip-covered --script-launch-mode=subprocess --cov-fail-under=100 --no-cov-on-fail
   requires:
     - pip
     - pytest
     - pytest-cov
+    - pytest-console-scripts
 
 about:
   home: https://github.com/Carreau/pep440
