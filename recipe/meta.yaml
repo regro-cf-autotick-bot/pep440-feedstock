@@ -5,21 +5,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pep440/pep440-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/p/pep440/pep440-{{ version }}.tar.gz
   sha256: 58b37246cc2b13fee1ca2a3c092cb3704d21ecf621a5bdbb168e44e697f6d04d
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - flit-core >=3.2,<4
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
-    - python >=3.7
+    - python >={{ python_min }}
 
 test:
   source_files:
@@ -35,6 +35,7 @@ test:
     - pytest
     - pytest-cov
     - pytest-console-scripts
+    - python {{ python_min }}
 
 about:
   home: https://github.com/Carreau/pep440
